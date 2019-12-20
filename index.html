@@ -11,65 +11,48 @@
     <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
-
-    <style>
-        .box {
-            border: 1px solid #000;
-        }
-
-        .box--large {
-            width: 180px;
-            height: 180px;
-        }
-
-        .box--medium {
-            width: 120px;
-            height: 120px;
-        }
-
-        .box--small {
-            width: 60px;
-            height: 60px;
-        }
-    </style>
-
     <script type="text/babel">
 
-        function Box({ style, size, className = '', ...rest }) {
-            const sizeClassName = size ? `box--${size}` : ''
+        const state = { eventCount: 0, username: '' }
+
+        function App() {
             return (
-                <div
-                    className={`box ${className} ${sizeClassName}`}
-                    style={{ paddingLeft: 20, ...style }}
-                    {...rest}
-                />
+                <div>
+                    <p>
+                        There have been {state.eventCount} events
+                    </p>
+                    <p>
+                        <button onClick={increment}>😊</button>
+                    </p>
+                    <p>
+                        You typed: {state.username}
+                    </p>
+                    <p>
+                        <input onChange={updateUsername} />
+                    </p>
+                </div>
             )
         }
 
-        const element = (
-            <div>
-                <Box
-                    size="small"
-                    style={{ backgroundColor: 'lightblue' }}
-                >
-                    small box
-                </Box>
-                <Box
-                    size="medium"
-                    style={{ backgroundColor: 'pink' }}
-                >
-                    medium box
-                </Box>
-                <Box
-                    size="large"
-                    style={{ backgroundColor: 'orange' }}
-                >
-                    large box
-                </Box>
-            </div>
-        )
+        function increment() {
+            setState({ eventCount: state.eventCount + 1 })
+        }
 
-        ReactDOM.render(element, document.getElementById('root'))
+        function updateUsername(event) {
+            setState({ username: event.target.value })
+        }
+
+
+        function setState(newState) {
+            Object.assign(state, newState)
+            renderApp()
+        }
+
+        function renderApp() {
+            ReactDOM.render(<App />, document.getElementById('root'))
+        }
+
+        renderApp()
 
     </script>
 </body>
