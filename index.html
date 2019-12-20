@@ -13,49 +13,33 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
     <script type="text/babel">
 
-        // function Message({ message }) {
-        //     if (!message) {
-        //         return <div>No Message</div>
-        //     }
-        //     return <div>{message}</div>
-        // }
+        const rootElement = document.getElementById('root')
 
-        // function Message({ message }) {
-        //     if (!message) {
-        //         return React.createElement('div', null, message)
-        //     }
-        //     return React.createElement('div', null, message)
-        // }
-
-        // function Message({ message }) {
-        //     return (
-        //         <div>
-        //             {
-        //                 message
-        //                     ? React.createElement('div', null, message)
-        //                     : React.createElement('div', null, message)
-        //             }
+        // function tick() {
+        //     const time = new Date().toLocaleTimeString()
+        //     const element = `
+        //         <div>It is
+        //             <input value="${time}" />
+        //             <input value="${time}" />
         //         </div>
-        //     )
+        //     `
+        //     rootElement.innerHTML = element
+        //     // ReactDOM.render(element, rootElement)
         // }
 
-        function Message({ message }) {
-            return (
-                <div>
-                    {
-                        message
-                            ? <div>{message}</div>
-                            : <div>No Message</div>
-                    }
+        function tick() {
+            const time = new Date().toLocaleTimeString()
+            const element = (
+                <div>It is
+                    <input value={time} />
+                    <input value={time} />
                 </div>
             )
+            ReactDOM.render(element, rootElement)
         }
 
-        ReactDOM.render(
-            <Message message={null} />,
-            document.getElementById('root')
-        )
-
+        tick()
+        setInterval(tick, 1000)
     </script>
 </body>
 
